@@ -1,0 +1,138 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+#include <malloc.h>
+
+
+
+typedef struct History
+{
+	float bought,sold;
+	char time[80];
+
+
+} History; //ask tutor, solved
+getmytime(char *buffer, size_t bufflength, char *format)
+{
+
+	time_t rawtime;
+	struct tm *info;
+
+	time( &rawtime );
+	info = localtime( &rawtime );
+
+	strftime(buffer, bufflength, format, info);
+
+
+}
+void func(struct History *History1);
+// getmytime(buffer,80,"%c")); USE TO GET TIME use with %s in argument
+int main()
+{
+
+	int x=0;           	//*** KEEP COUNT # transactions
+	int z=0;  // counting for sold 
+	History History1[100];         	//*** HAS ROOM FOR 100 History
+
+
+	char buffer[80]; //  include for time
+	int min = 50000;
+	int max = 60000;
+	char sen[100];
+	char exit[100];
+	char b[100],p[100],h[100];
+	float buy, sell;
+	double balance = 70000; //remember to lf for double float b/c balance will increase
+	float bitcoin = 0;
+	int args;
+	int y = bitcoin;
+	int i = balance;
+
+	srand(time(0));
+	int num = (rand() % (max - min + 1)) + min;
+	double price;
+	while (1)
+	{
+
+    	i = balance;
+    	y = bitcoin;
+    	printf("Welcome to Baby Bitcoin, enter a command: ");
+    	gets(sen);
+    	printf("\n");
+
+    	args = sscanf (sen, "%s", exit); // LEAVING PROGRAM
+    	if ((args == 1) && (strcmp(exit,"quit")==0))
+    	{
+        	printf("Thank you for using Baby Bitcoin.");
+        	break;
+
+    	}
+    	args = sscanf (sen, "%s",p); // PRICE
+    	if ((args == 1) && (strcmp(p,"price")==0))
+    	{
+        	printf("The price of Bitcoin is %.0lf\n", price = (rand() % (max - min + 1)) + min);
+    	}
+
+    	args = sscanf (sen, "buy %f", &buy); //BUY
+    	if (args == 1)
+    	{
+        	if (balance<price*buy)
+        	{
+            	printf("You can't afford that much.\n");
+        	}
+        	else
+        	{
+
+            	num = (rand() % (max - min + 1)) + min;
+            	History1[x].bought = buy; // ask tutor,
+            	getmytime(buffer,80,"%x - %I:%M%p");
+            	strcpy(History1[x].time, buffer);
+            	balance = i - price * buy;
+            	bitcoin = buy + bitcoin;
+            	printf("You bought %.1f of Bitcoin.\n", buy);
+
+            	x++;
+        	}
+    	}
+    	args = sscanf (sen, "sell %f", &sell); //SELL
+    	if (args == 1)
+    	{
+        	if (bitcoin<sell)
+        	{
+            	printf("You don't own enough bitcoin to sell or you're trying to sell what you don't own.\n");
+        	}
+        	else
+       	 {
+       	     num = (rand() % (max - min + 1)) + min;
+       	     History1[z].sold = sell; // ask tutor,
+            	getmytime(buffer,80,"%x - %I:%M%p");
+            	strcpy(History1[z].time, buffer);
+            	balance = i + price * sell;
+            	bitcoin = bitcoin - sell;
+            	printf("You sold %.1f of biotcoin.\n", sell);
+            	z++;
+
+        	}
+    	}
+    	args = sscanf (sen, "%s",b); // BALANCE
+    	if ((args == 1) && (strcmp(b,"balance")==0))
+    	{
+        	printf("Your balance is %.2lf and you own %.2lf of Bitcoin\n", balance,bitcoin);
+    	}
+
+    	args = sscanf (sen, "%s",h); // HISTORY
+    	if ((args == 1) && (strcmp(h,"history")==0))
+    	{
+	        printf("Here is your history of buying and selling bitcoin:\n");
+        	for (int i = 0 ; i<x; i++ )
+            	printf("You bought %.1lf of Bitcoin on %s \n",History1[i].bought,History1[i].time);
+            	for (int i = 0 ; i<z; i++ )
+            	printf("You sold %.1lf of Bitcoin on %s \n",History1[i].sold,History1[i].time);
+    	}
+
+	}
+
+	return 0;
+}
