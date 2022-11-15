@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <malloc.h>
+
+
+
+typedef struct Race {
+  char racex[50];
+  char time[100];
+  struct Race *next;
+} *raceptr;
+
+typedef struct Entrant {
+ char hname[50];
+ char hname2[50];
+ char jname[50];
+ char jname2[50];
+ int jweight;
+ raceptr entry;
+} trance;
+
+void printentry(raceptr l) {
+ raceptr curr = l;
+ while (curr != NULL) {
+     printf("%s %s\n",
+            curr->racex,curr->time);
+     curr = curr->next;
+ }
+ printf("\n");
+}
+
+void printtrance(trance e[], int num) {
+ printf("\nRaces have been completed, Results: \n\n");
+  for (int i=0; i<num; i++) {
+      printf("Horse #1 is: %s \nHorse #2 is: %s \nJockey #1 is: %s \nJockey #2 is: %s \nJockey #1 weight is: %d\nJockey's #2 weight was missing because contestent didn't enter it.\n",
+      e[i].hname,e[i].hname2,e[i].jname,e[i].jname2,e[i].jweight);
+      printentry(e[i].entry);
+  }
+  printf("\n");
+}
+raceptr addrace(raceptr head,
+           char *racex,
+           char *time) {
+raceptr n = malloc(sizeof(struct Race));
+strcpy(n->racex,racex);
+strcpy(n->time,time);
+n->next = NULL;
+
+if (head == NULL){
+    head = n;
+    return head;
+}
+
+raceptr curr = head;
+while (curr->next !=NULL){
+ curr = curr->next;
+}
+ curr-> next = n;
+
+ return head;
+}
+getmytime(char *buffer, size_t bufflength, char *format)
+{
+
+	time_t rawtime;
+	struct tm *info;
+
+	time( &rawtime );
+	info = localtime( &rawtime );
+
+	strftime(buffer, bufflength, format, info);
+
+
+}
+int main()
+{
+    char buffer[80];
+    getmytime(buffer,80,"%x");
+    trance Races[3];
+
+  for (int i=0; i<3; i++) {
+      Races[i].entry = NULL;
+  }
+  strcpy(Races[0].hname,"Sora Wind");
+  strcpy(Races[0].hname2,"Wind Crusher");
+  strcpy(Races[0].jname,"Jockey Rock");
+  strcpy(Races[0].jname2,"Paper Shoot!");
+  Races[0].jweight=250;
+Races[0].entry=addrace(
+Races[0].entry,"Race 1",buffer);
+
+strcpy(Races[1].hname,"Wild Dog");
+  strcpy(Races[1].hname2,"Cat Doggo");
+  strcpy(Races[1].jname,"Mad Dog");
+  strcpy(Races[1].jname2,"Calm cat");
+  Races[1].jweight=234;
+Races[1].entry=addrace(
+Races[1].entry,"Race 2",buffer);
+
+strcpy(Races[2].hname,"Final Fantasy");
+  strcpy(Races[2].hname2,"World Of Warcraft");
+  strcpy(Races[2].jname,"Stardew Valley");
+  strcpy(Races[2].jname2,"Animal Crossing");
+  Races[2].jweight=100;
+Races[2].entry=addrace(
+Races[2].entry,"Race 3",buffer);
+printtrance(Races, 3);
+return 0;
+}
