@@ -1,0 +1,3 @@
+-  Hi, I’m @Ale-Mej
+- I'm a college student studying IT, while learning coding and doing some self projects. 
+- I'm interested in the different career paths I can take with the skills I learn from coding.  
