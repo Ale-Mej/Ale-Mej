@@ -1,0 +1,94 @@
+Alexis Mejia 
+Part 1
+Source code
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int age;
+    printf("The ticket is 14 dollars.\n");
+    printf ("Enter your age:\n");
+    scanf("%d",&age);
+    if(age <18){
+    printf("You can get a 10 dollar admission for being a minor.");
+    }else if(age >=85){
+    printf("You can get a 10 dollar admission for being a Senior.");
+    }else{
+    printf("You have to buy full price");
+}
+    return 0;
+}
+
+Output
+The ticket is 14 dollars.
+Enter your age:
+86
+You can get a 10 dollar admission for being a Senior.
+Process returned 0 (0x0)   execution time : 1.481 s
+Press any key to continue.
+
+Part 2 
+Source Code
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int score;
+    printf("Enter your test score:\n");
+    scanf("%d",&score);
+    if(score >=90){
+    printf("You Got an A!");
+    }else if(score >=80){
+    printf("You got a B!.");
+    }else if (score >= 70){
+    printf("You got a C");
+}else if (score >= 60){
+    printf("You got a D");
+}else if (score <60){
+    printf("Yeah you did fail, I'm, sorry.");
+}
+    return 0;
+}
+
+Output
+Enter your test score:
+70
+You got a C
+Process returned 0 (0x0)   execution time : 1.586 s
+Press any key to continue.
+
+Part 3
+Source Code
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    printf("how ");
+    char low;
+for (low=1;low<=5;low++)
+{
+    printf("low ",low);
+};
+printf ("\ncan you ");
+    char i;
+for (i=1;i<=5;i++)
+{
+    printf("go ",i);
+}
+    return 0;
+}
+
+Output
+how low low low low low
+can you go go go go go
+Process returned 0 (0x0)   execution time : 0.007 s
+Press any key to continue.
+
+
+
+
+
+
