@@ -1,0 +1,153 @@
+Source Code: 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+int main()
+{
+    int choices;
+    int w,x,y,z;
+    float balance = 200; // balance
+            int i;
+            i = balance ;
+
+
+    void menu()
+    {
+
+        printf("Welcome to Horse Betting!\n Please select an option for 1-6\n");
+        printf("1) Place an exacta bet ($10)\n");
+        printf("2) Place an exactabox bet ($5)\n");
+        printf("3) Place a trifectabet ($25)\n");
+        printf("4) Place a trifectabox bet ($20)\n");
+        printf("5) Balance\n");
+        printf("6) Exit Program\n");
+    } //menu
+    void race(int *myarray, int n)
+    {
+        static int init=0;
+        time_t t;
+        if (!init)
+        {
+            srand((unsigned) time(&t));
+            init = 1;
+        }
+
+        for (int i = 0; i < n; i++)
+        {
+            int randomValue = i + ( rand() % (n - i) );
+            int randomElement = myarray[randomValue];
+            myarray[randomValue] = myarray[i];
+            myarray[i] = randomElement;
+        }
+    } // race shuffle void ends
+
+    while (1)
+    {
+        i=balance;
+
+        {
+
+            int myarray[4] = { 1, 2, 3, 4};
+            for (int i=0; i<1; i++)
+            {
+                race(myarray, 4);
+                printf("Winning order: %d %d %d %d\n\n",
+                       myarray[0], myarray[1], myarray[2], myarray[3]);
+
+            } // race winning numbers
+            menu();
+            printf("Enter your choice:\n\n");
+            scanf("%d", &choices);
+            if (choices ==1)
+            {
+                printf("Place your exacta bet\n\n");
+                int succeeds = scanf("%d %d",&w,&x); // integers
+                int forward = ( w==myarray [0])&&( x==myarray [1]); // check to see if matches array
+
+                if ( forward )
+                {
+                    printf("You won! +$100 \n\n");
+                    balance = i+100; // check if math works out
+
+                }
+                else
+                {
+                    printf("You lost\n\n");
+                    balance = i-10;
+                }
+
+
+            }
+            else if (choices==2)
+            {
+                printf ("Place your exactabox bet\n\n");
+                int succeeds = scanf("%d %d",&w,&x); // integers
+                int forward = ( w==myarray [0])&&( x==myarray [1]); // check to see if matches array
+                int backwards = ( w==myarray [1])&&( x==myarray [0]);
+                if ( forward || backwards )
+                {
+                    printf("You've won!\n\n");
+                    balance = i+25;
+                }
+                else
+                {
+                    printf("You lost\n\n");
+                    balance = i-5;
+                }
+            }
+
+            else if (choices==3)
+            {
+                printf ("Place your trifectabet bet\n\n");
+                int succeeds = scanf("%d %d %d",&w,&x, &y); // integers
+                int forward = ( w==myarray [0])&&( x==myarray [1])&&(y==myarray [2]); // check to see if matches array
+                if ( forward )
+                {
+                    printf("You've won!\n\n");
+                    balance = i+200;
+                }
+                else
+                {
+                    printf("You lost\n\n");
+                    balance = i-25;
+                }
+            }
+
+            else if (choices==4)
+            {
+                printf ("Place your trifectabox bet\n\n");
+                int succeeds = scanf("%d %d %d",&w,&x,&y); // integers
+                int forward = ( w==myarray [0])||( x==myarray [1])||(y==myarray [2]); // check to see if matches array
+
+                if ( forward  )
+                {
+                    printf("You've won!\n\n");
+                    balance = i+150;
+                }
+                else
+                {
+                    printf("You lost\n\n");
+                    balance = i-20;
+                }
+            }
+
+            else if (choices==5)
+            {
+                printf ("Your Balance is %f\n\n",balance ); //enter Balance for %d later
+            }
+
+            else if (choices==6)
+            {
+                printf ("Exiting the Program now\n\n");
+                break;
+            }
+            else
+            {
+                printf("Try again, Bad Command\n\n");
+            }
+        }
+    }
+}
